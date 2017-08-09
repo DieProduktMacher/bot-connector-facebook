@@ -88,11 +88,11 @@ describe('fb/messenger', function () {
       it('sends the request with given data to the facebook messages api', function () {
         const json = {foo: 'foo'}
         request.callsFake(() => Promise.resolve())
-        messenger.send.one(json)
-        .then(_ => {
-          assert(request.calledOnce)
-          expect(request).to.have.been.calledWith(expectedRequestData(json))
-        })
+        return messenger.send.one(json)
+          .then(_ => {
+            assert(request.calledOnce)
+            expect(request).to.have.been.calledWith(expectedRequestData(json))
+          })
       })
 
       describe('unsuccessful requests', function () {
@@ -107,7 +107,7 @@ describe('fb/messenger', function () {
         it('catches unsuccessful requests', function () {
           const json = {foo: 'foo'}
           request.callsFake(() => Promise.reject('error')) // eslint-disable-line prefer-promise-reject-errors
-          expect(_ => messenger.send.one(json)).to.not.throw()
+          expect(() => messenger.send.one(json)).to.not.throw()
         })
       })
     })
@@ -117,7 +117,7 @@ describe('fb/messenger', function () {
         sinon.stub(messenger.send, 'one').callsFake(() => Promise.resolve())
         const one = {one: 'one'}
         const two = {two: 'two'}
-        messenger.send.all([one, two]).then(_ => {
+        return messenger.send.all([one, two]).then(_ => {
           assert(messenger.send.one.calledTwice)
           expect(messenger.send.one.firstCall).to.have.been.calledWith(one)
           expect(messenger.send.one.secondCall).to.have.been.calledWith(two)
