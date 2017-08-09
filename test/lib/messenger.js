@@ -126,7 +126,7 @@ describe('messenger', function () {
       })
     })
 
-    describe('all other sending functions', function () {
+    describe('response functions', function () {
       beforeEach(function () {
         sinon.stub(messenger.send, 'one')
         sinon.stub(messenger.send, 'all')
@@ -137,10 +137,10 @@ describe('messenger', function () {
         messenger.send.all.restore()
       })
 
-      describe('messenger.send.typingOn()', function () {
+      describe('messenger.response.typingOn()', function () {
         it('builds and send the data for typingOn', function () {
           sinon.stub(messenger.build, 'typing').returns('typing_on')
-          messenger.send.typingOn(recipient)
+          messenger.response.typingOn(recipient)
           assert(messenger.build.typing.calledOnce)
           expect(messenger.build.typing).to.have.been.calledWith(recipient, 'on')
           assert(messenger.send.one.calledOnce)
@@ -149,10 +149,10 @@ describe('messenger', function () {
         })
       })
 
-      describe('messenger.send.typingOff()', function () {
+      describe('messenger.response.typingOff()', function () {
         it('builds and send the data for typingOn', function () {
           sinon.stub(messenger.build, 'typing').returns('typing_off')
-          messenger.send.typingOff(recipient)
+          messenger.response.typingOff(recipient)
           assert(messenger.build.typing.calledOnce)
           expect(messenger.build.typing).to.have.been.calledWith(recipient, 'off')
           assert(messenger.send.one.calledOnce)
@@ -161,10 +161,10 @@ describe('messenger', function () {
         })
       })
 
-      describe('messenger.send.message()', function () {
+      describe('messenger.response.message()', function () {
         it('builds and send the data for message', function () {
           sinon.stub(messenger.build, 'message').returns('message')
-          messenger.send.message(recipient, {foo: 'foo'})
+          messenger.response.message(recipient, {foo: 'foo'})
           assert(messenger.build.message.calledOnce)
           expect(messenger.build.message).to.have.been.calledWith(recipient, {foo: 'foo'})
           assert(messenger.send.one.calledOnce)
@@ -173,11 +173,11 @@ describe('messenger', function () {
         })
       })
 
-      describe('messenger.send.messages()', function () {
+      describe('messenger.response.messages()', function () {
         it('builds and send the data for all messages', function () {
           const messages = [{one: 'one'}, {two: 'two'}]
           sinon.stub(messenger.build, 'messages').returns('built_messages')
-          messenger.send.messages(recipient, [{one: 'one'}, {two: 'two'}])
+          messenger.response.messages(recipient, [{one: 'one'}, {two: 'two'}])
           assert(messenger.build.messages.calledOnce)
           expect(messenger.build.messages).to.have.been.calledWith(recipient, messages)
           assert(messenger.send.all.calledOnce)
@@ -186,10 +186,10 @@ describe('messenger', function () {
         })
       })
 
-      describe('messenger.send.text', function () {
+      describe('messenger.response.text', function () {
         it('builds and send the data for message', function () {
           sinon.stub(messenger.build, 'text').returns('built_text')
-          messenger.send.text(recipient, 'foo')
+          messenger.response.text(recipient, 'foo')
           assert(messenger.build.text.calledOnce)
           expect(messenger.build.text).to.have.been.calledWith(recipient, 'foo')
           assert(messenger.send.one.calledOnce)
@@ -198,11 +198,11 @@ describe('messenger', function () {
         })
       })
 
-      describe('messenger.send.texts()', function () {
+      describe('messenger.response.texts()', function () {
         it('builds and sends the data for all texts', function () {
           const texts = ['one', 'two']
           sinon.stub(messenger.build, 'texts').returns('built_texts')
-          messenger.send.texts(recipient, texts)
+          messenger.response.texts(recipient, texts)
           assert(messenger.build.texts.calledOnce)
           expect(messenger.build.texts).to.have.been.calledWith(recipient, texts)
           assert(messenger.send.all.calledOnce)
