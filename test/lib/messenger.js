@@ -1,6 +1,6 @@
 'use strict'
 
-describe('fb/messenger', function () {
+describe('messenger', function () {
   const messenger = libRequire('messenger')
   const recipient = 'recipient'
   describe('building messenger request data', function () {

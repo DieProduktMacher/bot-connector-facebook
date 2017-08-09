@@ -1,6 +1,6 @@
 'use strict'
 
-require('./connector')
-require('./input')
+require('./lambda')
+require('./normalize')
 require('./messenger')
 require('./user-data')

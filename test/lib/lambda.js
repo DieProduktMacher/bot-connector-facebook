@@ -1,8 +1,8 @@
 'use strict'
 
-const connector = libRequire('connector')
+const lambda = libRequire('lambda')
 
-describe('fb/connector', function () {
+describe('lambda', function () {
   describe('main', function () {
     const event = {
       body: JSON.stringify({
@@ -31,7 +31,7 @@ describe('fb/connector', function () {
       const normalizer = sinon.stub().returns('normalized_event')
       const handler = sinon.stub()
 
-      connector.main(event, handler, normalizer, callback)
+      lambda.main(event, handler, normalizer, callback)
       assert(callback.calledOnce)
       expect(normalizer.callCount).to.equal(4)
       expect(handler.callCount).to.equal(4)
@@ -47,7 +47,7 @@ describe('fb/connector', function () {
       const normalizer = sinon.stub()
       const handler = sinon.stub()
 
-      connector.main(invalidEvent, handler, normalizer, callback)
+      lambda.main(invalidEvent, handler, normalizer, callback)
       assert(callback.calledOnce)
       expect(normalizer.callCount).to.equal(0)
       expect(handler.callCount).to.equal(0)
@@ -63,7 +63,7 @@ describe('fb/connector', function () {
       const handler = sinon.stub()
       sinon.stub(console, 'error').callsFake(_ => {})
 
-      connector.main(invalidEvent, handler, normalizer, callback)
+      lambda.main(invalidEvent, handler, normalizer, callback)
       assert(callback.calledOnce)
       expect(normalizer.callCount).to.equal(0)
       expect(handler.callCount).to.equal(0)
@@ -81,7 +81,7 @@ describe('fb/connector', function () {
           'hub.challenge': challenge
         }
       }
-      connector.verify(event, (error, response) => {
+      lambda.verify(event, (error, response) => {
         assert.notExists(error)
         expect(response.statusCode).to.equal(200)
         expect(response.body).to.equal(challenge)
@@ -95,7 +95,7 @@ describe('fb/connector', function () {
           'hub.challenge': challenge
         }
       }
-      connector.verify(event, (error, response) => {
+      lambda.verify(event, (error, response) => {
         assert.notExists(error)
         expect(response.statusCode).to.equal(401)
       })
@@ -107,7 +107,7 @@ describe('fb/connector', function () {
           'hub.verify_token': process.env.FB_MESSENGER_VERIFICATION_TOKEN
         }
       }
-      connector.verify(event, (error, response) => {
+      lambda.verify(event, (error, response) => {
         assert.notExists(error)
         expect(response.statusCode).to.equal(401)
       })
