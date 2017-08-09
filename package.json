@@ -1,0 +1,54 @@
+{
+  "name": "bot-connector-facebook",
+  "version": "0.1.0",
+  "description": "Bot connector for facebook",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "standard && nyc mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DieProduktMacher/bot-connector-facebook.git"
+  },
+  "keywords": [
+    "facebook",
+    "messenger",
+    "bot"
+  ],
+  "author": "thomas.limp@produktmacher.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DieProduktMacher/bot-connector-facebook/issues"
+  },
+  "homepage": "https://github.com/DieProduktMacher/bot-connector-facebook#readme",
+  "dependencies": {
+    "level-logger": "^2.0.0",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "mockery": "^2.1.0",
+    "nyc": "^11.1.0",
+    "sinon": "^3.1.0",
+    "sinon-chai": "^2.12.0",
+    "standard": "^10.0.3"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "it",
+      "xit",
+      "expect",
+      "assert",
+      "sinon",
+      "mockery",
+      "libRequire"
+    ]
+  }
+}
