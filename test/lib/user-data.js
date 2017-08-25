@@ -68,5 +68,11 @@ describe('user-data', function () {
       request.callsFake(_ => Promise.resolve(response))
       expect(() => userData(user)).to.not.throw()
     })
+
+    it('user id is not set', function () {
+      const response = 'response'
+      request.callsFake(_ => Promise.resolve(response))
+      expect(() => userData(user)).to.not.throw()
+    })
   })
 })
