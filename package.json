@@ -4,7 +4,8 @@
   "description": "Bot connector for facebook",
   "main": "lib/index.js",
   "scripts": {
-    "test": "standard && nyc mocha"
+    "test": "standard && nyc mocha",
+    "watch": "mocha --reporter min --watch"
   },
   "repository": {
     "type": "git",

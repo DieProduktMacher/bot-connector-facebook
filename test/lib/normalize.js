@@ -41,4 +41,25 @@ describe('normalize', function () {
     expect(normalize(data).payload.raw).equal(data.message.quick_reply.payload)
     expect(normalize(data).payload.data).eql(JSON.parse(data.message.quick_reply.payload))
   })
+
+  it('contains an array of attachments from the message', function () {
+    const attachments = ['foo', 'bar']
+    const data = {message: {attachments}}
+    expect(normalize(data).attachments).to.eql(attachments)
+  })
+
+  it('contains the location from the attachments', function () {
+    const locationAttachment = {
+      type: 'location',
+      payload: {
+        coordinates: {
+          lat: (Math.random() * 2 - 1) * 90,
+          long: (Math.random() * 2 - 1) * 180
+        }
+      }
+    }
+    const data = {message: {attachments: [locationAttachment]}}
+    expect(normalize(data).location.lat).to.eql(locationAttachment.payload.coordinates.lat)
+    expect(normalize(data).location.long).to.eql(locationAttachment.payload.coordinates.long)
+  })
 })
